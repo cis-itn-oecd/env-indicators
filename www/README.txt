@@ -1,0 +1,1 @@
+This folder contains the HTML mockup of the website.

@@ -1,0 +1,1 @@
+This folder contains all the artifacts produced by the team responsible for the implementation of the graphs.

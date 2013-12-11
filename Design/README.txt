@@ -1,0 +1,1 @@
+This folder contains the artifacts produced by the graphics designers.
