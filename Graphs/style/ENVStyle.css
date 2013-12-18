@@ -1,0 +1,42 @@
+﻿body
+{
+}
+
+.country
+{
+    color: #00B050;
+    font-family: Verdana;
+    font-size: 16pt;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.survey
+{
+    color: #4F81BD;
+    font-family: Verdana;
+    font-size: 12pt;
+    font-weight: bold;
+    border: 2px solid #4F81BD;
+    padding: 15px;
+    margin: 5px;
+}
+
+hr
+{
+    border: 1px solid #4F81BD;
+}
+
+.links
+{
+    margin-bottom: 20px;
+}
+
+a
+{
+    margin-right: 20px;
+}
+    a:active
+    {
+        text-decoration:none;
+    }
