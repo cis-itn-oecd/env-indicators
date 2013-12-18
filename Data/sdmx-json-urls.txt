@@ -1,0 +1,58 @@
+# JSON URL SUFFIX: &dimensionAtObservation=allDimensions
+# JSON URL PREFIX: http://stats.oecd.org/sdmx-json/data/
+
+
+# CLIMATE CHANGE
+# GHG Index 1990 = 100 : http://dotstat.oecd.org//Index.aspx?QueryId=53246
+# File: climate-change/ghg.json
+http://stats.oecd.org/sdmx-json/data/AIR_GHG/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+EU27+OEU+OTO+NMEC+LVA+LTU+RUS.GHG.INDEX_1990/OECD?startTime=1990&endTime=2012&dimensionAtObservation=allDimensions
+
+# GDP and CO2 index 1990 = 100: http://dotstat.oecd.org//Index.aspx?QueryId=53249
+# File: climate-change/gdp-co2.json
+http://stats.oecd.org/sdmx-json/data/GREEN_GROWTH/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO+WLD.GG_A11+GG_B11/OECD?startTime=1990&endTime=2012&dimensionAtObservation=allDimensions
+
+
+# AIR QUALITY
+# SOX Index 1990 = 100: http://dotstat.oecd.org//Index.aspx?QueryId=53292
+# File: air-quality/sox.json
+http://stats.oecd.org/sdmx-json/data/AIR_EMISSIONS/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO.SOX.INDEX_1990/OECD?startTime=1990&endTime=2012&dimensionAtObservation=allDimensions
+
+# NOX Index 1990 = 100: http://dotstat.oecd.org//Index.aspx?QueryId=53293
+# File: air-quality/nox.json
+http://stats.oecd.org/sdmx-json/data/AIR_EMISSIONS/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO.NOX.INDEX_1990/OECD?startTime=1990&endTime=2012&dimensionAtObservation=allDimensions
+
+# GDP index 1990 = 100: http://dotstat.oecd.org//Index.aspx?QueryId=53261
+# File: air-quality/gdp.json
+http://stats.oecd.org/sdmx-json/data/GREEN_GROWTH/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO+WLD.GG_A11/OECD?startTime=1990&endTime=2012&dimensionAtObservation=allDimensions
+
+# WASTE GENERATION
+# Municipal waste index 1990 = 100: http://dotstat.oecd.org//Index.aspx?QueryId=53256
+# File: waste-generation/municipal-waste.json
+http://stats.oecd.org/sdmx-json/data/MUNW/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OEU+OTO.MW_INDEX/OECD?startTime=1990&endTime=2011&dimensionAtObservation=allDimensions
+
+# GDP index 1990 = 100: http://dotstat.oecd.org//Index.aspx?QueryId=53261
+# File: waste-generation/gdp.json
+http://stats.oecd.org/sdmx-json/data/GREEN_GROWTH/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO+WLD.GG_A11/OECD?startTime=1990&endTime=2012&dimensionAtObservation=allDimensions
+
+# BIODIVERSITY
+# Mammals : http://dotstat.oecd.org//Index.aspx?QueryId=53266
+# File: biodiversity/mammals.json
+## JSON URL IS NOT WORKING
+
+# Birds: http://dotstat.oecd.org//Index.aspx?QueryId=53267
+# File: biodiversity/birds.json
+## JSON URL IS NOT WORKING
+
+# Vascular plants: http://dotstat.oecd.org//Index.aspx?QueryId=53268
+# File: biodiversity/vascular-plants.json
+## JSON URL IS NOT WORKING
+
+# FOREST AREA
+# Forest area http://dotstat.oecd.org//Index.aspx?QueryId=53295
+# File: forest-area/forest-area.json
+http://stats.oecd.org/sdmx-json/data/GREEN_GROWTH/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO+WLD.GG_C43/OECD?startTime=2011&endTime=2011&dimensionAtObservation=allDimensions
+
+# ENVIRONMENTALLY RELATED TAXES
+# Share in GDP: http://dotstat.oecd.org//Index.aspx?QueryId=53300
+# File: environementally-related-taxes/share-gdp.json
+http://stats.oecd.org/sdmx-json/data/GREEN_GROWTH/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO+WLD+NMEC+ARG+BRA+CHN+IND+IDN+RUS+SAU+ZAF+BRIICS.GG_E41/OECD?startTime=2011&endTime=2011&dimensionAtObservation=allDimensions
