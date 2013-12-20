@@ -320,7 +320,7 @@
 
         'ForestResources_1': {
             type: 'Column',
-            jsonFiles: ['forest-area/forest-area.json'],
+            jsonFiles: 'ForestResources_2.json',
             options: {
                 title: 'Intensity of use of forest resources',
                 axisTitle: '%',
@@ -330,24 +330,12 @@
                 axisMax: 100,
                 axisTicksAt: 20,
                 axisLabelsAt: 20,
-                axisLabelsDecimals: 0,
-                series: [
-                    {
-                        name: 'Forest share',
-                        useJsonIndex: 0,
-                        dataCoords: [
-                            sdmxAll,
-                            sdmxFirst,
-                            sdmxFirst
-                        ],
-                        categIndex: 0
-                    }
-                ]
+                axisLabelsDecimals: 0
             }
         },
         'ForestResources_2': {
             type: 'Column',
-            jsonFiles: 'ForestResources_2.json',
+            jsonFiles: ['forest-resources/forest-area.json'],
             options: {
                 title: 'Forest area',
                 axisTitle: '%',
@@ -357,7 +345,19 @@
                 axisMax: 80,
                 axisTicksAt: 20,
                 axisLabelsAt: 20,
-                axisLabelsDecimals: 0
+                axisLabelsDecimals: 0,
+                series: [
+                    {
+                        name: 'Forest area',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxAll,
+                            sdmxFirst,
+                            sdmxFirst
+                        ],
+                        categIndex: 0
+                    }
+                ]
             }
         },
 
