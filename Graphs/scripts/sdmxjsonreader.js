@@ -73,7 +73,7 @@ function smdxGetCoords(data, oObs, keyPart, orderOnKeyParts, opt) {
 // tree: if true returns arrays in arrays instead of one single array (default)   !!not tested!!
 // desc: array of boolean to put to true for each key part of which order descending instead of ascending (default))   !!not tested!!
 //
-// Example: getCoords( {"0:1:0:10": 1.2, "1:1:0:9": 0.8, "2:1:0:8": 0.5},
+// Example: GetValues( {"0:1:0:10": 1.2, "1:1:0:9": 0.8, "2:1:0:8": 0.5},
 //                     [3]) 
 //           returns:        [ 0.5, 0.8, 1.2 ]
 //

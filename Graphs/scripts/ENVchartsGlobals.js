@@ -1,12 +1,21 @@
 ﻿$(function ()
 {
     $.globalEval('var JsonPath = "data/";');
+    $.globalEval('var HighLightISO = ["OECD", "WORLD"];');
+    $.globalEval('var NoDataValue = Math.pow(10, 10);'); // null or undefined values will not generate any tooltips on HighCharts (no point=no tooltips): 
+                                                         // 10^10 is defined as "no value" and generates a transparent column with a "No Data" tooltip
+    $.globalEval('var NoDataMessage = { en: "no data", fr: "pas de données" };');
+
     $.globalEval('var ENVCharts;');
 
     // Coordinates selection pre-defined functions
     var sdmxAll = function () { return true; };
     var sdmxFirst = function (o, i) { return i === 0; };
     var sdmxAtSelectedISO = function (o, i) { return o.id === CtrISO2[SelectedISO].ISO3; };
+    function sdmxIdIs(dimId)
+    {
+        return function (o, i) { return o.id === dimId; };
+    }
 
     var Charts = {
 
@@ -170,7 +179,7 @@
 
         'ClimateChange_1': {
             type: 'Line',
-            jsonFiles: 'ClimateChange_1.json',
+            jsonFiles: ['climate-change/gdp-co2.json', 'climate-change/ghg.json'],
             options: {
                 title: 'GHG emissions trends',
                 axisTitle: 'Index (1990=100)',
@@ -178,7 +187,41 @@
                 axisMax: 200,
                 axisTicksAt: 25,
                 axisLabelsAt: 50,
-                axisLabelsDecimals: 0
+                axisLabelsDecimals: 0,
+                timeLabelsAt: 5,
+                series: [
+                    { 
+                        name: 'GDP',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxAtSelectedISO,
+                            sdmxAll,
+                            sdmxIdIs('GG_A11')
+                        ],
+                        categIndex: 1
+                    },
+                    {
+                        name: 'CO2',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxAtSelectedISO,
+                            sdmxAll,
+                            sdmxIdIs('GG_B11')
+                        ],
+                        categIndex: 1
+                    },
+                    {
+                        name: 'GHG',
+                        useJsonIndex: 1,
+                        dataCoords: [
+                            sdmxAtSelectedISO,
+                            sdmxFirst,
+                            sdmxFirst,
+                            sdmxAll
+                        ],
+                        categIndex: 3
+                    }
+                ]
             }
         },
         'ClimateChange_2': {
@@ -233,7 +276,7 @@
 
         'EnvironmentallyRelatedTaxes_1': {
             type: 'Column',
-            jsonFiles: 'EnvironmentallyRelatedTaxes_1.json',
+            jsonFiles: 'environementally-related-taxes/share-gdp.json',
             options: {
                 title: 'Share in GDP',
                 axisTitle: '%',
@@ -243,7 +286,19 @@
                 axisMax: 5,
                 axisTicksAt: 1,
                 axisLabelsAt: 1,
-                axisLabelsDecimals: 0
+                axisLabelsDecimals: 0,
+                series: [
+                    { 
+                        name: '% GDP',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxAll,
+                            sdmxFirst,
+                            sdmxFirst
+                        ],
+                        categIndex: 0
+                    }
+                ]        
             }
         },
         'EnvironmentallyRelatedTaxes_2': {
@@ -265,7 +320,7 @@
 
         'ForestResources_1': {
             type: 'Column',
-            jsonFiles: 'ForestResources_1.json',
+            jsonFiles: ['forest-area/forest-area.json'],
             options: {
                 title: 'Intensity of use of forest resources',
                 axisTitle: '%',
@@ -275,7 +330,19 @@
                 axisMax: 100,
                 axisTicksAt: 20,
                 axisLabelsAt: 20,
-                axisLabelsDecimals: 0
+                axisLabelsDecimals: 0,
+                series: [
+                    {
+                        name: 'Forest share',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxAll,
+                            sdmxFirst,
+                            sdmxFirst
+                        ],
+                        categIndex: 0
+                    }
+                ]
             }
         },
         'ForestResources_2': {
@@ -347,7 +414,7 @@
 
         'WasteGeneration_1': {
             type: 'Line',
-            jsonFiles: 'WasteGeneration_1.json',
+            jsonFiles: ['municipal-waste/gdp.json', 'municipal-waste/municipal-waste.json'],
             options: {
                 title: 'Municipal waste generation trends',
                 axisTitle: 'Index (1990=100)',
@@ -355,7 +422,30 @@
                 axisMax: 200,
                 axisTicksAt: 25,
                 axisLabelsAt: 50,
-                axisLabelsDecimals: 0
+                axisLabelsDecimals: 0,
+                timeLabelsAt: 5,
+                series: [
+                    {
+                        name: 'GDP',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxAtSelectedISO,
+                            sdmxAll,
+                            sdmxFirst
+                        ],
+                        categIndex: 1
+                    },
+                    {
+                        name: 'Mun. waste',
+                        useJsonIndex: 1,
+                        dataCoords: [
+                            sdmxAtSelectedISO,
+                            sdmxFirst,
+                            sdmxAll
+                        ],
+                        categIndex: 2
+                    }
+                ]
             }
         },
         'WasteGeneration_2': {
@@ -425,7 +515,12 @@
                 },
                 series: {
                     colors: ['#000000', '#FF0000', '#FF7C80'],
-                    lineWidths: [1, 2]
+                    lineWidths: [1, 2],
+                    pointOptions: {
+                        marker: {
+                            enabled: false 
+                        }
+                    }
                 }
             },
 
@@ -441,15 +536,15 @@
                     formatter: function ()
                     {
                         var ret = '';
-                        if (this.y === Math.pow(10, 10))        // This value is defined as no-data
+                        if (this.y === NoDataValue)   
                         {
-                            ret += CtrISO2[this.key].Name[StartLanguage] + ": " + ((StartLanguage == "fr") ? "pas de données" : "no data");
+                            ret += CtrISO3[this.key].Name[StartLanguage] + ": " + (NoDataMessage[StartLanguage] || NoDataMessage['en']);
                         }
                         else
                         {
                             var dec = (isNaN(this.series.chart.ENVOptions.valueDecimals)) ? self.globals.column.tooltip.decimals : this.series.chart.ENVOptions.valueDecimals;
                             ret += (this.series.chart.ENVOptions.tooltipHeader) ? '<span style="color:' + self.globals.column.tooltip.color + '">' + this.series.chart.ENVOptions.tooltipHeader + '</span><br/>' : '';
-                            ret += '<span style="color:' + this.point.color + '">' + CtrISO2[this.key].Name[StartLanguage] + ': </span>';
+                            ret += '<span style="color:' + this.point.color + '">' + CtrISO3[this.key].Name[StartLanguage] + ': </span>';
                             ret += '<span style="color:#000;font-weight:normal">' + (Math.round(this.y * Math.pow(10, dec)) / Math.pow(10, dec)).toString() + (this.series.chart.ENVOptions.valueSuffix || '') + '</span>';
                         }
                         return ret;
@@ -459,7 +554,28 @@
                     colors: {
                         'default': '#C4BD97',
                         selected: '#FF0000',
-                        highlight: '#66FF66'
+                        highlight: '#66FF66',
+                        nodata: 'transparent'
+                    },
+                    pointOptions: {
+                        shadow: false,
+                        borderRadius: 1,
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true,
+                            inside: true,
+                            verticalAlign: 'bottom',
+                            style: {
+                                color: '#8E896F',
+                                fontSize: '8pt'
+                            },
+                            formatter: function ()
+                            {
+                                if (this.y !== NoDataValue && this.y > this.series.chart.yAxis[0].max)
+                                    return '▲';
+                                else return '';
+                            }
+                        }
                     }
                 }
             },

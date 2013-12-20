@@ -28,6 +28,13 @@
                 },
                 "ISO3": "BEL"
             },
+            "BR": {
+                "Name": {
+                    "en": "Brazil",
+                    "fr": "Brésil"
+                },
+                "ISO3": "BRA"
+            },
             "CA": {
                 "Name": {
                     "en": "Canada",
@@ -41,6 +48,13 @@
                     "fr": "Chili"
                 },
                 "ISO3": "CHL"
+            },
+            "CN": {
+                "Name": {
+                    "en": "China",
+                    "fr": "Chine"
+                },
+                "ISO3": "CHN"
             },
             "CZ": {
                 "Name": {
@@ -203,6 +217,13 @@
                 },
                 "ISO3": "SVN"
             },
+            "ZA": {
+                "Name": {
+                    "en": "South Africa",
+                    "fr": "Afrique du Sud"
+                },
+                "ISO3": "ZAF"
+            },
             "ES": {
                 "Name": {
                     "en": "Spain",
@@ -251,6 +272,13 @@
                     "fr": "OCDE"
                 },
                 "ISO3": "OTO"
+            },
+            "WORLD": {
+                "Name": {
+                    "en": "World",
+                    "fr": "Monde"
+                },
+                "ISO3": "WLD"
             }
         },
         "ISO3": {
@@ -275,6 +303,13 @@
                 },
                 "ISO2": "BE"
             },
+            "BRA": {
+                "Name": {
+                    "en": "Brazil",
+                    "fr": "Brésil"
+                },
+                "ISO2": "BR"
+            },
             "CAN": {
                 "Name": {
                     "en": "Canada",
@@ -288,6 +323,13 @@
                     "fr": "Chili"
                 },
                 "ISO2": "CL"
+            },
+            "CHN": {
+                "Name": {
+                    "en": "China",
+                    "fr": "Chine"
+                },
+                "ISO2": "CN"
             },
             "CZE": {
                 "Name": {
@@ -450,6 +492,13 @@
                 },
                 "ISO2": "SI"
             },
+            "ZAF": {
+                "Name": {
+                    "en": "South Africa",
+                    "fr": "Afrique du Sud"
+                },
+                "ISO2": "ZA"
+            },
             "ESP": {
                 "Name": {
                     "en": "Spain",
@@ -498,6 +547,13 @@
                     "fr": "OCDE"
                 },
                 "ISO2": "OECD"
+            },
+            "WLD": {
+                "Name": {
+                    "en": "World",
+                    "fr": "Monde"
+                },
+                "ISO2": "WORLD"
             }
         }
     };

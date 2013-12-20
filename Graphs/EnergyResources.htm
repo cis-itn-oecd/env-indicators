@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Energy Resources</title>
+
+    <link href="style/ENVStyle.css" rel="stylesheet" />
+
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js" type="text/javascript"></script>
+    <script src="http://code.highcharts.com/highcharts.js" type="text/javascript"></script>
+
+    <script src="scripts/sdmxjsonreader.js" type="text/javascript"></script>
+    <script src="scripts/ENVpageGlobals.js" type="text/javascript"></script>
+    <script src="scripts/ENVchartsGlobals.js" type="text/javascript"></script>
+    <script src="scripts/ENVcountriesGlobals.js" type="text/javascript"></script>
+    <script src="scripts/ENVpage.js" type="text/javascript"></script>
+    <script src="scripts/ENVcharts.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(function ()
+        {
+
+            var callback = MakeCharts;
+
+            var charts = ['EnergyResources_1', 'EnergyResources_2'];
+
+            InitPage("ENERGY RESOURCES", callback, charts);
+
+        });
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <div class="links">
+                <a href="ClimateChange.htm">Climate change</a>
+                <a href="AirQuality.htm">Air quality</a>
+                <a href="WasteGeneration.htm">Waste generation</a>
+                <a href="Biodiversity.htm">Biodiversity</a>
+                <a href="FreshwaterQuality.htm">Water quality</a>
+                <a href="FreshwaterResources.htm">Water resources</a>
+                <a href="ForestResources.htm">Forest resources</a>
+                <a href="EnergyResources.htm">Energy resources</a>
+                <a href="EnvironmentallyRelatedTaxes.htm">Environmentally related taxes</a>
+
+                <select id="selcountry"></select>
+            </div>
+            <span class="country"></span>
+            <div class="survey">
+                <span class="surveyname"></span>
+                <hr />
+                <div class="chartdiv" style="width: 400px; height: 200px"></div>
+                <div class="chartdiv" style="width: 400px; height: 200px"></div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+
