@@ -12,6 +12,7 @@ function MakeCharts(chartKeys)
     {
         key = chartKeys[i];
 
+        $div = undefined;
         if ($.isPlainObject(key))
         {
             if (key.containerSelector)
