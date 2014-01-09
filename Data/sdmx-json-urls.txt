@@ -37,15 +37,15 @@ http://stats.oecd.org/sdmx-json/data/GREEN_GROWTH/AUS+AUT+BEL+CAN+CHL+CZE+DNK+ES
 # BIODIVERSITY
 # Mammals : http://dotstat.oecd.org//Index.aspx?QueryId=53266
 # File: biodiversity/mammals.json
-## JSON URL IS NOT WORKING
+http://stats.oecd.org/sdmx-json/data/WILD_LIFE/THREAT_PERCENT.MAMMAL.AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+NMEC+RUS/OECD?dimensionAtObservation=allDimensions
 
 # Birds: http://dotstat.oecd.org//Index.aspx?QueryId=53267
 # File: biodiversity/birds.json
-## JSON URL IS NOT WORKING
+http://stats.oecd.org/sdmx-json/data/WILD_LIFE/THREAT_PERCENT.BIRD.AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+NMEC+RUS/OECD?dimensionAtObservation=allDimensions
 
 # Vascular plants: http://dotstat.oecd.org//Index.aspx?QueryId=53268
 # File: biodiversity/vascular-plants.json
-## JSON URL IS NOT WORKING
+http://stats.oecd.org/sdmx-json/data/WILD_LIFE/THREAT_PERCENT.VASCULAR_PLANT.AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+NMEC+RUS/OECD?dimensionAtObservation=allDimensions
 
 # FOREST AREA
 # Forest area http://dotstat.oecd.org//Index.aspx?QueryId=53295
