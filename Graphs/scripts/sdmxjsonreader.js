@@ -124,7 +124,7 @@ function sdmxGetObs(data, coordFilterFns, resultsMapFn) {
     var dim, obss = data.structure.dimensions.observation, t = [];
     // TIME_PERIOD has no keyPosition member...
     var tp = obss.filter(function (o) { return o.id === 'TIME_PERIOD'; })[0];
-    tp.keyPosition = $.inArray(tp, obss);
+    if (tp) tp.keyPosition = $.inArray(tp, obss);
     for (var i = 0; i < obss.length; i++) {
         dim = obss.filter(function (o) {
             return ( o.keyPosition !== undefined && o.keyPosition === i); 

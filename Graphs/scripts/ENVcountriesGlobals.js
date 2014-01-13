@@ -203,6 +203,13 @@
                 },
                 "ISO3": "PRT"
             },
+            "RU": {
+                "Name": {
+                    "en": "Russian Federation",
+                    "fr": "Fédération de Russie"
+                },
+                "ISO3": "RUS"
+            },
             "SK": {
                 "Name": {
                     "en": "Slovak Republic",
@@ -477,6 +484,13 @@
                     "fr": "Portugal"
                 },
                 "ISO2": "PT"
+            },
+            "RUS": {
+                "Name": {
+                    "en": "Russian Federation",
+                    "fr": "Fédération de Russie"
+                },
+                "ISO2": "RU"
             },
             "SVK": {
                 "Name": {
