@@ -11,6 +11,10 @@ http://stats.oecd.org/sdmx-json/data/AIR_GHG/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN
 # File: climate-change/gdp-co2.json
 http://stats.oecd.org/sdmx-json/data/GREEN_GROWTH/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO+WLD.GG_A11+GG_B11/OECD?startTime=1990&endTime=2012&dimensionAtObservation=allDimensions
 
+# CO2 emission per GDP: http://dotstat.oecd.org//Index.aspx?QueryId=54040
+# File: climate-change/co2-per-gdp.json
+http://stats.oecd.org/sdmx-json/data/ENV_KEI/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO.CO2_GDP/OECD?dimensionAtObservation=allDimensions
+
 
 # AIR QUALITY
 # SOX Index 1990 = 100: http://dotstat.oecd.org//Index.aspx?QueryId=53292
@@ -25,6 +29,14 @@ http://stats.oecd.org/sdmx-json/data/AIR_EMISSIONS/AUS+AUT+BEL+CAN+CHL+CZE+DNK+E
 # File: air-quality/gdp.json
 http://stats.oecd.org/sdmx-json/data/GREEN_GROWTH/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO+WLD.GG_A11/OECD?startTime=1990&endTime=2012&dimensionAtObservation=allDimensions
 
+# SOx et NOx emission intensities per GDP: 
+# SOx: http://dotstat.oecd.org//Index.aspx?QueryId=54042 
+# File: air-quality/sox-per-gdp.json
+http://stats.oecd.org/sdmx-json/data/ENV_KEI/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO.SOX_GDP/OECD?dimensionAtObservation=allDimensions
+
+# NOx: http://dotstat.oecd.org//Index.aspx?QueryId=54043
+# File: air-quality/nox-per-gdp.json
+http://stats.oecd.org/sdmx-json/data/ENV_KEI/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO.NOX_GDP/OECD?dimensionAtObservation=allDimensions
 
 # WASTE GENERATION
 # Municipal waste index 1990 = 100: http://dotstat.oecd.org//Index.aspx?QueryId=53256
@@ -35,6 +47,13 @@ http://stats.oecd.org/sdmx-json/data/MUNW/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FR
 # File: waste-generation/gdp.json
 http://stats.oecd.org/sdmx-json/data/GREEN_GROWTH/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO+WLD.GG_A11/OECD?startTime=1990&endTime=2012&dimensionAtObservation=allDimensions
 
+# Municipal waste per capita: http://dotstat.oecd.org//Index.aspx?QueryId=54044
+# File: waste-generation/waste-per-capita.json
+http://stats.oecd.org/sdmx-json/data/ENV_KEI/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO.MUNW_CAP/OECD?dimensionAtObservation=allDimensions
+
+# Municipal waste recovery rates : http://dotstat.oecd.org//Index.aspx?QueryId=54045
+# File: waste-generation/waste-recovery-rates.json
+http://stats.oecd.org/sdmx-json/data/ENV_KEI/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO.MUNW_CAP/OECD?dimensionAtObservation=allDimensions
 
 # BIODIVERSITY
 # Mammals : http://dotstat.oecd.org//Index.aspx?QueryId=53266
@@ -49,14 +68,43 @@ http://stats.oecd.org/sdmx-json/data/WILD_LIFE/THREAT_PERCENT.BIRD.AUS+AUT+BEL+C
 # File: biodiversity/vascular-plants.json
 http://stats.oecd.org/sdmx-json/data/WILD_LIFE/THREAT_PERCENT.VASCULAR_PLANT.AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+NMEC+RUS/OECD?dimensionAtObservation=allDimensions
 
+# FRESH WATER QUALITY
+# Population connected to a sewage treatment plant : http://dotstat.oecd.org//Index.aspx?QueryId=54046
+# File: fresh-water-quality/pop-connected.json
+http://stats.oecd.org/sdmx-json/data/ENV_KEI/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO.POP_SWE/OECD?dimensionAtObservation=allDimensions
+
+# FRESH WATER RESOURCES
+# Freshwater abstractions compared to available freshwater resources : http://dotstat.oecd.org//Index.aspx?QueryId=54047
+# File: fresh-water-resources/abstractions-resources.json
+http://stats.oecd.org/sdmx-json/data/ENV_KEI/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO.ABSTRACT_RENEW/OECD?dimensionAtObservation=allDimensions
+
+# Freshwater abstractions for public supply per capita: http://dotstat.oecd.org//Index.aspx?QueryId=54048
+# File: fresh-water-resources/abstractions-pub-supply.json
+http://stats.oecd.org/sdmx-json/data/ENV_KEI/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO.PUB_CAP/OECD?dimensionAtObservation=allDimensions
 
 # FOREST AREA
 # Forest area http://dotstat.oecd.org//Index.aspx?QueryId=53295
 # File: forest-area/forest-area.json
 http://stats.oecd.org/sdmx-json/data/GREEN_GROWTH/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO+WLD.GG_C43/OECD?startTime=2011&endTime=2011&dimensionAtObservation=allDimensions
 
+# Intensity of use of forest resources : http://dotstat.oecd.org//Index.aspx?QueryId=54049
+# File: forest-area/forest-intensity.json
+http://stats.oecd.org/sdmx-json/data/ENV_KEI/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO.FO_INT/OECD?dimensionAtObservation=allDimensions
+
+# ENERGY RESOURCES
+# Energy intensity : http://dotstat.oecd.org//Index.aspx?QueryId=54050
+# File: energy-resources/energy-intensity.json
+http://stats.oecd.org/sdmx-json/data/ENV_KEI/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO.TPES_GDP/OECD?dimensionAtObservation=allDimensions
+
+# Share of fossil fuels: http://dotstat.oecd.org//Index.aspx?QueryId=54051
+# File: energy-resources/share-fossil.json
+http://stats.oecd.org/sdmx-json/data/ENV_KEI/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO.FF_TPES/OECD?dimensionAtObservation=allDimensions
 
 # ENVIRONMENTALLY RELATED TAXES
 # Share in GDP: http://dotstat.oecd.org//Index.aspx?QueryId=53300
 # File: environementally-related-taxes/share-gdp.json
 http://stats.oecd.org/sdmx-json/data/GREEN_GROWTH/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO+WLD+NMEC+ARG+BRA+CHN+IND+IDN+RUS+SAU+ZAF+BRIICS.GG_E41/OECD?startTime=2011&endTime=2011&dimensionAtObservation=allDimensions
+
+# Share in total tax revenues : http://dotstat.oecd.org//Index.aspx?QueryId=54052
+# File: environementally-related-taxes/share-total-tax.json
+http://stats.oecd.org/sdmx-json/data/ENV_KEI/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO.TAX_REV/OECD?dimensionAtObservation=allDimensions
