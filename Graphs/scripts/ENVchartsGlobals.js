@@ -129,7 +129,7 @@
 
         'Biodiversity_1': {
             type: 'Column',
-            jsonFiles: 'Biodiversity_1.json',
+            jsonFiles: ['biodiversity/mammals.json'],
             options: {
                 title: 'Threatened species: mammals',
                 axisTitle: '%',
@@ -137,15 +137,27 @@
                 valueDecimals: 1,
                 valueSuffix: '%',
                 axisMin: 0,
-                axisMax: 100,
-                axisTicksAt: 20,
-                axisLabelsAt: 20,
-                axisLabelsDecimals: 0
+                axisMax: 50,
+                axisTicksAt: 10,
+                axisLabelsAt: 10,
+                axisLabelsDecimals: 0,
+                series: [
+                    {
+                        name: '%',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxFirst,
+                            sdmxFirst,
+                            sdmxAll
+                        ],
+                        categIndex: 2
+                    }
+                ]
             }
         },
         'Biodiversity_2': {
             type: 'Column',
-            jsonFiles: 'Biodiversity_2.json',
+            jsonFiles: ['biodiversity/birds.json'],
             options: {
                 title: 'Threatened species: birds',
                 axisTitle: '%',
@@ -153,15 +165,27 @@
                 valueDecimals: 1,
                 valueSuffix: '%',
                 axisMin: 0,
-                axisMax: 100,
-                axisTicksAt: 20,
-                axisLabelsAt: 20,
-                axisLabelsDecimals: 0
+                axisMax: 50,
+                axisTicksAt: 10,
+                axisLabelsAt: 10,
+                axisLabelsDecimals: 0,
+                series: [
+                    {
+                        name: '%',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxFirst,
+                            sdmxFirst,
+                            sdmxAll
+                        ],
+                        categIndex: 2
+                    }
+                ]
             }
         },
         'Biodiversity_3': {
             type: 'Column',
-            jsonFiles: 'Biodiversity_3.json',
+            jsonFiles: ['biodiversity/vascular-plants.json'],
             options: {
                 title: 'Threatened species: vascular plants',
                 axisTitle: '%',
@@ -169,10 +193,22 @@
                 valueDecimals: 1,
                 valueSuffix: '%',
                 axisMin: 0,
-                axisMax: 100,
-                axisTicksAt: 20,
-                axisLabelsAt: 20,
-                axisLabelsDecimals: 0
+                axisMax: 50,
+                axisTicksAt: 10,
+                axisLabelsAt: 10,
+                axisLabelsDecimals: 0,
+                series: [
+                    {
+                        name: '%',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxFirst,
+                            sdmxFirst,
+                            sdmxAll
+                        ],
+                        categIndex: 2
+                    }
+                ]
             }
         },
 
@@ -561,6 +597,7 @@
                         shadow: false,
                         borderRadius: 1,
                         borderWidth: 0,
+                        
                         dataLabels: {
                             enabled: true,
                             inside: true,

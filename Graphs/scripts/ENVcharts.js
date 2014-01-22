@@ -302,7 +302,7 @@ function ColumnData(jsonArr, opt)
     var t = [];
     for (i in CtrISO3)
     {
-        if ($.inArray(i, srtcategs) === -1)
+        if (i !== 'WLD' && $.inArray(i, srtcategs) === -1)
         {
             t.push(i);
             srtvals.unshift(NoDataValue);
@@ -418,7 +418,12 @@ function ColumnChart($container, chartData)
                 shadow: false,
                 borderWidth: 0,
                 pointPadding: 0,
-                pointWidth: 7
+                pointWidth: 7,
+                states: {
+                    hover: {
+                        enabled: false
+                    }
+                }
             },
             series: {
                 dataLabels: {
@@ -426,7 +431,7 @@ function ColumnChart($container, chartData)
                     enabled: true,
                     x: 2,
                     y: -10
-                }
+                },
             }
         },
         tooltip: {
