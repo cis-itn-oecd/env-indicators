@@ -1,6 +1,6 @@
 ﻿$(function ()
 {
-
+    // GLOBALS
     if ("undefined" === typeof Countries) $.globalEval('var Countries = {};');
     if ("undefined" === typeof CtrISO2) $.globalEval('var CtrISO2 = {};');
     if ("undefined" === typeof CtrISO3) $.globalEval('var CtrISO3 = {};');

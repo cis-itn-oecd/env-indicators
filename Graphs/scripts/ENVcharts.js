@@ -132,7 +132,7 @@ function LineData(jsonArr, opt)
             // Extend the predefined point with the retrieved point data
             serieData.push($.extend({
                 x: Date.UTC(parseInt(categs[j]), 0, 1, 0, 0, 0),
-                y: vals[j],
+                y: ($.isFunction(opt.series[i].valueAdjustment)) ? opt.series[i].valueAdjustment(vals[j]) : vals[j],
                 color: col
             }, ENVCharts.globals.line.series.pointOptions || {}));
         }
@@ -197,8 +197,8 @@ function LineChart($container, chartData)
                 text: chartData.options.axisTitle,
                 align: 'high',
                 rotation: 0,
-                offset: -6.67 * (chartData.options.axisTitle || '') - 8.34,
-                x: -10,
+                textAlign: 'left',
+                offset: -5,
                 y: 4,
                 style: ENVCharts.globals.styles.axisTitle
             },
@@ -274,44 +274,65 @@ function ColumnData(jsonArr, opt)
     vals = sdmxGetValues(obs, [ser.categIndex]);
 
     // Sort both arrays
+    var adjVal;
     for (i = 0; i < categs.length; i++)
     {
-        if (!srtcategs.length && !srtvals.length)
+        adjVal = ($.isFunction(opt.series[0].valueAdjustment)) ? opt.series[0].valueAdjustment(vals[i]) : vals[i];
+        if (adjVal !== NoDataValue || ShowPointsWithNoData)
         {
-            srtcategs.push(categs[i]);
-            srtvals.push(vals[i]);
-        }
-        else
-        {
-            if (vals[i] < srtvals[0] || vals[i] === NoDataValue)
+            if (!srtcategs.length && !srtvals.length)
             {
-                srtcategs.unshift(categs[i]);
-                srtvals.unshift(vals[i]);
+                srtcategs.push(categs[i]);
+                srtvals.push(adjVal);
             }
             else
             {
-                j = 1;
-                while (srtvals[j] !== undefined && vals[i] > srtvals[j]) j++;
-                srtcategs.splice(j, 0, categs[i]);
-                srtvals.splice(j, 0, vals[i]);
+                if (srtvals[0] !== NoDataValue)
+                {
+                    if (adjVal < srtvals[0] || adjVal === NoDataValue)
+                    {
+                        srtcategs.unshift(categs[i]);
+                        srtvals.unshift(adjVal);
+                    }
+                    else
+                    {
+                        j = 1;
+                        while (srtvals[j] !== undefined && adjVal > srtvals[j]) j++;
+                        srtcategs.splice(j, 0, categs[i]);
+                        srtvals.splice(j, 0, adjVal);
+                    }
+                }
+                else
+                {
+                    j = 1;
+                    while (srtvals[j] === NoDataValue) j++;
+                    if (adjVal !== NoDataValue)
+                    {
+                        while (srtvals[j] !== undefined && adjVal > srtvals[j]) j++;
+                    }
+                    srtcategs.splice(j, 0, categs[i]);
+                    srtvals.splice(j, 0, adjVal);
+                }
             }
         }
     }
 
-    // Add unknown // FACULTATIVE !
-    var t = [];
-    for (i in CtrISO3)
+    // Add unknown 
+    if (ShowPointsWithNoData)
     {
-        if (i !== 'WLD' && $.inArray(i, srtcategs) === -1)
+        var t = [];
+        for (i in CtrISO3)
         {
-            t.push(i);
-            srtvals.unshift(NoDataValue);
+            if (i !== 'WLD' && $.inArray(i, srtcategs) === -1)
+            {
+                t.push(i);
+                srtvals.unshift(NoDataValue);
+            }
         }
+        srtcategs = t.concat(srtcategs);
     }
-    srtcategs = t.concat(srtcategs);
-    //
 
-    for (i = 0; i < categs.length; i++)
+    for (i = 0; i < srtcategs.length; i++)
     {
         if (srtvals[i] === NoDataValue) col = colorObj.nodata;
         else if (CtrISO3[srtcategs[i]].ISO2 === SelectedISO) col = colorObj.selected;
@@ -390,9 +411,10 @@ function ColumnChart($container, chartData)
                 text: chartData.options.axisTitle,
                 align: 'high',
                 rotation: 0,
-                offset: -6.67 * (chartData.options.axisTitle || '').length - 8.34,
+                textAlign: 'left',
+                offset: -5,
                 y: 4,
-                style: ENVCharts.globals.styles.axisTitle
+                style:  ENVCharts.globals.styles.axisTitle
             },
             tickPosition: 'inside',
             tickLength: 2,
@@ -407,7 +429,7 @@ function ColumnChart($container, chartData)
                 {
                     return Math.round(this.value * Math.pow(10, chartData.options.axisLabelsDecimals)) / Math.pow(10, chartData.options.axisLabelsDecimals);
                 }
-            },
+            }, 
             gridLineWidth: 0,
             lineWidth: 1,
             lineColor: '#000000',
@@ -446,8 +468,8 @@ function ColumnChart($container, chartData)
     $container.highcharts(hc);
 }
 
-
-// Data proxy for STACKEDCOLUMN type charts
+// NOT IMPLEMENTED
+// Data proxy for STACKEDCOLUMN type charts       
 function StackedColumnData(json, opt)
 {
     var chartData;
@@ -551,7 +573,8 @@ function StackedColumnChart($container, chartData)
                 text: chartData.options.axisTitle,
                 align: 'high',
                 rotation: 0,
-                offset: -6.67 * (chartData.options.axisTitle || '') - 8.34,
+                textAlign: 'left',
+                offset: -5,
                 y: 4,
                 style: ENVCharts.globals.styles.axisTitle
             },
