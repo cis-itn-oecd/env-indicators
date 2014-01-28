@@ -40,20 +40,20 @@ http://stats.oecd.org/sdmx-json/data/ENV_KEI/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN
 
 # WASTE GENERATION
 # Municipal waste index 1990 = 100: http://dotstat.oecd.org//Index.aspx?QueryId=53256
-# File: waste-generation/municipal-waste.json
+# File: municipal-waste/municipal-waste.json
 http://stats.oecd.org/sdmx-json/data/MUNW/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OEU+OTO.MW_INDEX/OECD?startTime=1990&endTime=2011&dimensionAtObservation=allDimensions
 
 # GDP index 1990 = 100: http://dotstat.oecd.org//Index.aspx?QueryId=53261
-# File: waste-generation/gdp.json
+# File: municipal-wastegdp.json
 http://stats.oecd.org/sdmx-json/data/GREEN_GROWTH/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO+WLD.GG_A11/OECD?startTime=1990&endTime=2012&dimensionAtObservation=allDimensions
 
 # Municipal waste per capita: http://dotstat.oecd.org//Index.aspx?QueryId=54044
-# File: waste-generation/waste-per-capita.json
+# File: municipal-wastewaste-per-capita.json
 http://stats.oecd.org/sdmx-json/data/ENV_KEI/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO.MUNW_CAP/OECD?dimensionAtObservation=allDimensions
 
 # Municipal waste recovery rates : http://dotstat.oecd.org//Index.aspx?QueryId=54045
-# File: waste-generation/waste-recovery-rates.json
-http://stats.oecd.org/sdmx-json/data/ENV_KEI/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO.MUNW_CAP/OECD?dimensionAtObservation=allDimensions
+# File: municipal-waste/waste-recovery-rates.json
+http://stats.oecd.org/sdmx-json/data/ENV_KEI/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO.MUNW_PERCENT/OECD?dimensionAtObservation=allDimensions
 
 # BIODIVERSITY
 # Mammals : http://dotstat.oecd.org//Index.aspx?QueryId=53266
