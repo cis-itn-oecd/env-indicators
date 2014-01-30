@@ -53,7 +53,8 @@ http://stats.oecd.org/sdmx-json/data/ENV_KEI/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN
 
 # Municipal waste recovery rates : http://dotstat.oecd.org//Index.aspx?QueryId=54045
 # File: municipal-waste/waste-recovery-rates.json
-http://stats.oecd.org/sdmx-json/data/ENV_KEI/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO.MUNW_PERCENT/OECD?dimensionAtObservation=allDimensions
+http://stats.oecd.org/sdmx-json/data/ENV_KEI/AUS+AUT+BEL+CAN+CHL+CZE+DNK+EST+FIN+FRA+DEU+GRC+HUN+ISL+IRL+ISR+ITA+JPN+KOR+LUX+MEX+NLD+NZL+NOR+POL+PRT+SVK+SVN+ESP+SWE+CHE+TUR+GBR+USA+OTO.MUNW_PERCENT+MUNW_INC/OECD?dimensionAtObservation=allDimensions
+
 
 # BIODIVERSITY
 # Mammals : http://dotstat.oecd.org//Index.aspx?QueryId=53266
