@@ -277,7 +277,7 @@ function ColumnData(jsonArr, opt)
     var adjVal;
     for (i = 0; i < categs.length; i++)
     {
-        adjVal = ($.isFunction(opt.series[0].valueAdjustment)) ? opt.series[0].valueAdjustment(vals[i]) : vals[i];
+        adjVal = ($.isFunction(ser.valueAdjustment)) ? ser.valueAdjustment(vals[i]) : vals[i];
         if (adjVal !== NoDataValue || ShowPointsWithNoData)
         {
             if (!srtcategs.length && !srtvals.length)
@@ -325,7 +325,7 @@ function ColumnData(jsonArr, opt)
         {
             if (i !== 'WLD' && $.inArray(i, srtcategs) === -1)
             {
-                t.push(i);
+                t.unshift(i);
                 srtvals.unshift(NoDataValue);
             }
         }
@@ -468,59 +468,189 @@ function ColumnChart($container, chartData)
     $container.highcharts(hc);
 }
 
-// NOT IMPLEMENTED
-// Data proxy for STACKEDCOLUMN type charts       
-function StackedColumnData(json, opt)
+// Data proxy for STACKEDCOLUMN type charts    
+function StackedColumnData(jsonArr, opt)
 {
-    var chartData;
-
-    // Transform sdmx data
-    chartData = json;
-    //
-
+    var chartData = {};
     chartData.options = opt;
-    chartData.getColor = function (i, k, selected, highlight)
+    chartData.series = [];
+    chartData.categories = [];
+
+    var s, ss, i, j, ser, json, obs, vals = [], categs = [], col, colorObj, serieData = [], adjVal;
+    var srtcategs = [], srtvals = [];
+
+    colorObj = ENVCharts.globals.stackedColumn.series.colors;
+
+    for (s = 0; s < opt.series.length; s++)
     {
-        switch (k)
+        // Retrieve object from JSON
+        ser = opt.series[s];
+        json = jsonArr[ser.useJsonIndex];
+
+        // Get categories and values (using sdmxjsonreader.js)
+        obs = sdmxGetObs(json, ser.dataCoords);
+        categs[s] = smdxGetCoords(json, obs, ser.categIndex).map(function (o) { return (o && o.id) ? o.id : null; });;
+        obs = sdmxFillBlanks(obs, ser.categIndex, 0, categs.length, NoDataValue);
+        vals[s] = sdmxGetValues(obs, [ser.categIndex]);
+    }
+
+    // Align categs
+    //var maxLength = (function (t) { var m = 0; for (o in t) m = Math.max(m, o.length); return m; })(categs);
+    var newcategs = [], newvals = [], cat, index;
+    for (s = 0; s < opt.series.length; s++)
+    {
+        cat = categs[s];
+        newvals[s] = [];
+        for (i = 0; i < cat.length; i++)
         {
-            case selected:
-                return ENVCharts.globals.stackedColumn.series.colors.selected[i];
-            case highlight:
-                return ENVCharts.globals.stackedColumn.series.colors.highlight[i];
-            default:
-                return ENVCharts.globals.stackedColumn.series.colors.default[i];
+            if ($.inArray(cat[i], newcategs) === -1)
+            {
+                newcategs.push(cat[i]);
+            }
         }
     }
+    for (i = 0; i < newcategs.length; i++)
+    {
+        cat = newcategs[i];
+        for (s = 0; s < opt.series.length; s++)
+        {
+            index = $.inArray(cat, categs[s]);          
+            newvals[s].push((index > -1) ? vals[s][index] : null);
+        }
+    }
+    categs = newcategs;
+    vals = newvals;
+
+    // Sort both arrays
+    var valsum = [], srtvalsum = [], val;
+    for (i = 0; i < categs.length; i++)
+    {
+        valsum[i] = null;
+        for (s = 0; s < opt.series.length; s++)
+        {
+            if (!$.isArray(srtvals[s])) srtvals[s] = [];
+            val = ($.isFunction(opt.series[s].valueAdjustment)) ? opt.series[s].valueAdjustment(vals[s][i]) : vals[s][i];
+            if (val !== null)
+            {
+                valsum[i] = ((valsum[i] === null) ? 0 : valsum[i]) + val;
+            }
+        }
+        if (valsum[i] === null) valsum[i] = NoDataValue;
+        srtvalsum[i] = [];
+    }
+    var sumAt = function (fi, ft)
+    {
+        var fr = 0;
+        for (var fj = 0; fj < ft.length; fj++)
+        {
+            fr = fr + ft[fj][fi];
+        }
+        return fr;
+    }
+    for (i = 0; i < categs.length; i++)
+    {
+        adjVal = valsum[i];
+        if (adjVal !== NoDataValue || ShowPointsWithNoData)
+        {
+            if (!srtcategs.length && !srtvals[0].length)
+            {
+                srtcategs.push(categs[i]);
+                for (s = 0; s < opt.series.length; s++)
+                {
+                    srtvals[s].push(vals[s][i]);
+                }
+            }
+            else
+            {
+                if (sumAt(0, srtvals) !== NoDataValue * opt.series.length)
+                {
+                    if (adjVal < sumAt(0, srtvals) || adjVal === NoDataValue)
+                    {
+                        srtcategs.unshift(categs[i]);
+                        for (s = 0; s < opt.series.length; s++)
+                        {
+                            srtvals[s].unshift(vals[s][i]);
+                        }
+                    }
+                    else
+                    {
+                        j = 1;
+                        while (sumAt(j, srtvals) !== undefined && adjVal > sumAt(j, srtvals)) j++;
+                        srtcategs.splice(j, 0, categs[i]);
+                        for (s = 0; s < opt.series.length; s++)
+                        {
+                            srtvals[s].splice(j, 0, vals[s][i]);
+                        }
+                    }
+                }
+                else
+                {
+                    j = 1;
+                    while (sumAt(j, srtvals) === NoDataValue) j++;
+                    if (adjVal !== NoDataValue)
+                    {
+                        while (sumAt(j, srtvals) !== undefined && adjVal > sumAt(j, srtvals)) j++;
+                    }
+                    srtcategs.splice(j, 0, categs[i]);
+                    for (s = 0; s < opt.series.length; s++)
+                    {
+                        srtvals[s].splice(j, 0, vals[s][i]);
+                    }
+                }
+            }
+        }
+    }
+
+    // Add unknown 
+    if (ShowPointsWithNoData)
+    {
+        var t = [];
+        for (i in CtrISO3)
+        {
+            if (i !== 'WLD' && $.inArray(i, srtcategs) === -1)
+            {
+                t.unshift(i);
+                for (s = 0; s < opt.series.length; s++)
+                {
+                    srtvals[s].unshift(NoDataValue);
+                }
+            }
+        }
+        srtcategs = t.concat(srtcategs);
+    }
+
+    for (s = 0; s < opt.series.length; s++)
+    {
+        serieData = [];
+        for (i = 0; i < srtcategs.length; i++)
+        {
+            if (srtvals[s][i] === NoDataValue) col = colorObj.nodata;
+            else if (CtrISO3[srtcategs[i]].ISO2 === SelectedISO) col = colorObj.selected[s];
+            else if ($.inArray(srtcategs[i], HighLightISO) > -1
+                || $.inArray(CtrISO3[srtcategs[i]].ISO2, HighLightISO) > -1)
+                col = colorObj.highlight[s];
+            else col = colorObj.default[s];
+
+            serieData.push($.extend({
+                y: srtvals[s][i],
+                color: col
+            }, ENVCharts.globals.column.series.pointOptions || {}));
+
+            if (s === 0) chartData.categories.push(srtcategs[i]);
+        }
+
+        chartData.series.unshift({
+            name: opt.series[s].name,
+            color: colorObj.default[s],
+            data: serieData
+        });
+    }
+
     return chartData;
 }
 // HighCharts output for STACKEDCOLUMN type charts
 function StackedColumnChart($container, chartData)
 {
-
-    var cat = [];
-    var ser = [];
-    var val;
-    for (var i = chartData.Series.length - 1; i >= 0 ; i--)
-    {
-        val = [];
-        for (var key in chartData.Series[i].Data)
-        {
-            if (i == 0) cat.push(key);
-
-            var col = chartData.getColor(i, key, SelectedISO, 'OECD');
-            val.push({
-                y: chartData.Series[i].Data[key],
-                color: col,
-                shadow: false
-            });
-        }
-        ser.push({
-            name: chartData.Series[i].Name[StartLanguage],
-            color: chartData.getColor(i, '', SelectedISO, 'OECD'),
-            data: val
-        });
-    }
-
     var hc = {
         chart: {
             type: 'column',
@@ -540,10 +670,10 @@ function StackedColumnChart($container, chartData)
         },
         legend: {
             enabled: true,
-            floating: true,
             borderWidth: 0,
             align: 'left',
             verticalAlign: 'top',
+            layout: 'vertical',
             x: 45,
             y: 25,
             symbolWidth: 12,
@@ -551,13 +681,13 @@ function StackedColumnChart($container, chartData)
                 color: '#000000',
                 fontSize: '7pt',
                 fontWeight: 'normal'
-            }
+            }   
         },
         credits: {
             enabled: false
         },
         xAxis: {
-            categories: cat,
+            categories: chartData.categories,
             lineWidth: 1,
             lineColor: '#000000',
             minorGridLineWidth: 0,
@@ -612,7 +742,7 @@ function StackedColumnChart($container, chartData)
             borderColor: ENVCharts.globals.stackedColumn.tooltip.borderColor,
             formatter: ENVCharts.globals.stackedColumn.tooltip.formatter
         },
-        series: ser
+        series: chartData.series
     };
 
     $container.highcharts(hc);

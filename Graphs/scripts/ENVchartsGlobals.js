@@ -629,9 +629,8 @@
             }
         },
         'WasteGeneration_3': {
-            // type: 'StackedColumn',
-             type: 'Column',
-             jsonFiles: ['municipal-waste/waste-recovery-rates.json'],
+            type: 'StackedColumn',
+            jsonFiles: ['municipal-waste/waste-recovery-rates.json'],
             options: {
                 title: 'Municipal waste recovery rates',
                 axisTitle: '%',
@@ -644,11 +643,20 @@
                 axisLabelsDecimals: 2,
                 series: [
                     {
-                        name: '%',
+                        name: 'Material recovery (recycling + composting)',
                         useJsonIndex: 0,
                         dataCoords: [
                             sdmxAll,
-                            sdmxFirst
+                            sdmxIdIs('MUNW_PERCENT')
+                        ],
+                        categIndex: 0
+                    },
+                    {
+                        name: 'Incineration with energy recovery',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxAll,
+                            sdmxIdIs('MUNW_INC')
                         ],
                         categIndex: 0
                     }
@@ -773,7 +781,7 @@
                         var i, p, ret, dec, tot = 0, ic;
                         ic = (this.x === 'OECD') ? 'highlight' : (this.x === SelectedISO) ? 'selected' : 'default';
                         ret = (this.points[0].series.chart.ENVOptions.tooltipHeader) ? '<span style="color:' + self.globals.stackedColumn.tooltip.color + '">' + this.points[0].series.chart.ENVOptions.tooltipHeader + '</span><br/>' : '';
-                        ret += '<span style="color:' + self.globals.stackedColumn.series.colors[ic][0] + '">' + CtrISO2[this.x].Name[StartLanguage] + '</span><br/>';
+                        ret += '<span style="color:' + self.globals.stackedColumn.series.colors[ic][0] + '">' + CtrISO3[this.x].Name[StartLanguage] + '</span><br/>';
                         ret += '<table cellspacing="0" cellpadding="0" style="font-weight:normal">';
                         for (i = 0; i < this.points.length; i++)
                         {
@@ -795,7 +803,8 @@
                     colors: {
                         'default': ['#4A452A', '#C4BD97'],
                         selected: ['#FF0000', '#FFCDCD'],
-                        highlight: ['#66FF66', '#CCFFCC']
+                        highlight: ['#66FF66', '#CCFFCC'],
+                        nodata: 'transparent'
                     }
                 }
             },
