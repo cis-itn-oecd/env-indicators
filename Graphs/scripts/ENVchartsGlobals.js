@@ -1,14 +1,20 @@
 ﻿$(function ()
 {
-    $.globalEval('var JsonPath = "data/";');
-    $.globalEval('var HighLightISO = ["OECD", "WORLD"];');
-    $.globalEval('var NoDataValue = Math.pow(10, 10);'); // null or undefined values will not generate any tooltips on HighCharts (no point=no tooltips): 
+    // Globals
+    $.globalEval('var JsonPath = "data/";');  // General prefix to JSON files path
+
+    $.globalEval('var HighLightISO = ["OECD", "WORLD"];');  // Highlighted ISO codes
+
+    // Absence of data management
+    $.globalEval('var ShowPointsWithNoData = true;');   // Change this to false to hide the points with no data on column charts
+    $.globalEval('var NoDataValue = Math.pow(10, 10);'); // Because null or undefined point values will not generate any tooltips on HighCharts (no point=no tooltips): 
                                                          // 10^10 is defined as "no value" and generates a transparent column with a "No Data" tooltip
     $.globalEval('var NoDataMessage = { en: "no data", fr: "pas de données" };');
+    //
 
     $.globalEval('var ENVCharts;');
 
-    // Coordinates selection pre-defined functions
+    // SDMX coordinates selection pre-defined boolean callback functions
     var sdmxAll = function () { return true; };
     var sdmxFirst = function (o, i) { return i === 0; };
     var sdmxAtSelectedISO = function (o, i) { return o.id === CtrISO2[SelectedISO].ISO3; };
@@ -18,10 +24,11 @@
     }
 
     var Charts = {
-
+         
+        // AIR QUALITY
         'AirQuality_1': {
             type: 'Line',
-            jsonFiles: ['air-quality/GDP.json', 'air-quality/SOx.json'],
+            jsonFiles: ['air-quality/gdp.json', 'air-quality/sox.json'],
             options: {
                 title: 'SOx emission trends',
                 axisTitle: 'Index (1990=100)',
@@ -58,10 +65,10 @@
         },
         'AirQuality_2': {
             type: 'Line',
-            jsonFiles: ['air-quality/GDP.json', 'air-quality/NOx.json'],
+            jsonFiles: ['air-quality/gdp.json', 'air-quality/nox.json'],
             options: {
                 title: 'NOx emission trends',
-                axisTitle: 'Index (1990=100))',
+                axisTitle: 'Index (1990=100)',
                 axisMin: 0,
                 axisMax: 200,
                 axisTicksAt: 25,
@@ -95,38 +102,60 @@
         },
         'AirQuality_3': {
             type: 'Column',
-            jsonFiles: 'AirQuality_3.json',
+            jsonFiles: ['air-quality/sox-per-gdp.json'],
             options: {
                 title: 'SOx intensities per GDP',
                 axisTitle: 'kg/1000 USD',
                 tooltipHeader: 'SOx/GDP',
-                valueDecimals: 1,
+                valueDecimals: 2,
                 valueSuffix: 'kg',
                 axisMin: 0,
                 axisMax: 4,
                 axisTicksAt: 1,
                 axisLabelsAt: 1,
-                axisLabelsDecimals: 0
+                axisLabelsDecimals: 2,
+                series: [
+                    {
+                        name: 'kg/1000 USD',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxAll,
+                            sdmxFirst 
+                        ],
+                        categIndex: 0
+                    }
+                ]
             }
         },
         'AirQuality_4': {
             type: 'Column',
-            jsonFiles: 'AirQuality_4.json',
+            jsonFiles: ['air-quality/nox-per-gdp.json'],
             options: {
                 title: 'NOx intensities per GDP',
                 axisTitle: 'kg/1000 USD',
                 tooltipHeader: 'NOx/GDP',
-                valueDecimals: 1,
+                valueDecimals: 2,
                 valueSuffix: 'kg',
                 axisMin: 0,
-                axisMax: 4,
+                axisMax: 3,
                 axisTicksAt: 1,
                 axisLabelsAt: 1,
-                axisLabelsDecimals: 0
+                axisLabelsDecimals: 2,
+                series: [
+                    {
+                        name: 'kg/1000 USD',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxAll,
+                            sdmxFirst
+                        ],
+                        categIndex: 0
+                    }
+                ]
             }
         },
 
-
+        // BIODIVERSITY
         'Biodiversity_1': {
             type: 'Column',
             jsonFiles: ['biodiversity/mammals.json'],
@@ -137,9 +166,9 @@
                 valueDecimals: 1,
                 valueSuffix: '%',
                 axisMin: 0,
-                axisMax: 50,
-                axisTicksAt: 10,
-                axisLabelsAt: 10,
+                axisMax: 100,
+                axisTicksAt: 20,
+                axisLabelsAt: 20,
                 axisLabelsDecimals: 0,
                 series: [
                     {
@@ -165,9 +194,9 @@
                 valueDecimals: 1,
                 valueSuffix: '%',
                 axisMin: 0,
-                axisMax: 50,
-                axisTicksAt: 10,
-                axisLabelsAt: 10,
+                axisMax: 100,
+                axisTicksAt: 20,
+                axisLabelsAt: 20,
                 axisLabelsDecimals: 0,
                 series: [
                     {
@@ -193,9 +222,9 @@
                 valueDecimals: 1,
                 valueSuffix: '%',
                 axisMin: 0,
-                axisMax: 50,
-                axisTicksAt: 10,
-                axisLabelsAt: 10,
+                axisMax: 100,
+                axisTicksAt: 20,
+                axisLabelsAt: 20,
                 axisLabelsDecimals: 0,
                 series: [
                     {
@@ -212,7 +241,7 @@
             }
         },
 
-
+        // CLIMATE CHANGE
         'ClimateChange_1': {
             type: 'Line',
             jsonFiles: ['climate-change/gdp-co2.json', 'climate-change/ghg.json'],
@@ -262,25 +291,36 @@
         },
         'ClimateChange_2': {
             type: 'Column',
-            jsonFiles: 'ClimateChange_2.json',
+            jsonFiles: ['climate-change/co2-per-gdp.json'],
             options: {
                 title: 'CO2 emission intensities per GDP',
                 axisTitle: 'tonnes/1000 USD',
                 tooltipHeader: 'CO2 per GDP',
                 valueDecimals: 2,
-                valueSuffix: 'tonnes',
+                valueSuffix: ' tonnes',
                 axisMin: 0,
                 axisMax: 1,
                 axisTicksAt: 0.2,
                 axisLabelsAt: 0.2,
-                axisLabelsDecimals: 1
+                axisLabelsDecimals: 1,
+                series: [
+                    {
+                        name: 'CO2 per GDP',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxAll,
+                            sdmxFirst
+                        ],
+                        categIndex: 0
+                    }
+                ]
             }
         },
 
-
+        // ENERGY RESOURCES
         'EnergyResources_1': {
             type: 'Column',
-            jsonFiles: 'EnergyResources_1.json',
+            jsonFiles: ['energy-resources/energy-intensity.json'],
             options: {
                 title: 'Energy intensity',
                 axisTitle: '%',
@@ -290,12 +330,23 @@
                 axisMax: 0.6,
                 axisTicksAt: 0.1,
                 axisLabelsAt: 0.1,
-                axisLabelsDecimals: 1
+                axisLabelsDecimals: 1,
+                series: [
+                    {
+                        name: '%',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxAll,
+                            sdmxFirst
+                        ],
+                        categIndex: 0
+                    }
+                ]
             }
         },
         'EnergyResources_2': {
             type: 'Column',
-            jsonFiles: 'EnergyResources_2.json',
+            jsonFiles: ['energy-resources/share-fossil.json'],
             options: {
                 title: 'Share of fossil fuels',
                 axisTitle: '%',
@@ -305,14 +356,25 @@
                 axisMax: 100,
                 axisTicksAt: 20,
                 axisLabelsAt: 20,
-                axisLabelsDecimals: 0
+                axisLabelsDecimals: 0,
+                series: [
+                    {
+                        name: '%',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxAll,
+                            sdmxFirst
+                        ],
+                        categIndex: 0
+                    }
+                ]
             }
         },
 
-
+        // ENVIRONMENTALLY RELATED TAXES
         'EnvironmentallyRelatedTaxes_1': {
             type: 'Column',
-            jsonFiles: 'environementally-related-taxes/share-gdp.json',
+            jsonFiles: ['environementally-related-taxes/share-gdp.json'],
             options: {
                 title: 'Share in GDP',
                 axisTitle: '%',
@@ -339,24 +401,35 @@
         },
         'EnvironmentallyRelatedTaxes_2': {
             type: 'Column',
-            jsonFiles: 'EnvironmentallyRelatedTaxes_2.json',
+            jsonFiles: ['environementally-related-taxes/share-total-tax.json'],
             options: {
                 title: 'Share in total tax revenues',
                 axisTitle: '%',
                 valueSuffix: '%',
                 valueDecimals: 2,
-                axisMin: -1,
+                axisMin: -5,
                 axisMax: 20,
                 axisTicksAt: 5,
                 axisLabelsAt: 5,
-                axisLabelsDecimals: 0
+                axisLabelsDecimals: 0,
+                series: [
+                    {
+                        name: '%',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxAll,
+                            sdmxFirst
+                        ],
+                        categIndex: 0
+                    }
+                ]
             }
         },
 
-
+        // FOREST RESOURCES
         'ForestResources_1': {
             type: 'Column',
-            jsonFiles: 'ForestResources_2.json',
+            jsonFiles: ['forest-resources/forest-intensity.json'],
             options: {
                 title: 'Intensity of use of forest resources',
                 axisTitle: '%',
@@ -366,7 +439,20 @@
                 axisMax: 100,
                 axisTicksAt: 20,
                 axisLabelsAt: 20,
-                axisLabelsDecimals: 0
+                axisLabelsDecimals: 0,
+                series: [
+                    {
+                        name: '%',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxAll,
+                            sdmxFirst,
+                            sdmxFirst
+                        ],
+                        categIndex: 0,
+                        valueAdjustment: function (val) { return ((val === NoDataValue) ? val : val * 100); }
+                    }
+                ]
             }
         },
         'ForestResources_2': {
@@ -384,7 +470,7 @@
                 axisLabelsDecimals: 0,
                 series: [
                     {
-                        name: 'Forest area',
+                        name: '%',
                         useJsonIndex: 0,
                         dataCoords: [
                             sdmxAll,
@@ -397,10 +483,10 @@
             }
         },
 
-
+        // FRESH WATER QUALITY
         'FreshwaterQuality_1': {
             type: 'Column',
-            jsonFiles: 'FreshwaterQuality_1.json',
+            jsonFiles: ['fresh-water-quality/pop-connected.json'],
             options: {
                 title: 'Population connected to a sewage treatment plant',
                 axisTitle: '%',
@@ -411,14 +497,25 @@
                 axisMax: 100,
                 axisTicksAt: 20,
                 axisLabelsAt: 20,
-                axisLabelsDecimals: 0
+                axisLabelsDecimals: 0,
+                series: [
+                    {
+                        name: '%',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxAll,
+                            sdmxFirst
+                        ],
+                        categIndex: 0
+                    }
+                ]
             }
         },
 
-
+        // FRESH WATER RESOURCES
         'FreshwaterResources_1': {
             type: 'Column',
-            jsonFiles: 'FreshwaterResources_1.json',
+            jsonFiles: ['fresh-water-resources/abstractions-resources.json'],
             options: {
                 title: 'Freshwater abstractions compared to available freshwater resources',
                 axisTitle: '%',
@@ -428,26 +525,48 @@
                 axisMax: 40,
                 axisTicksAt: 10,
                 axisLabelsAt: 10,
-                axisLabelsDecimals: 0
+                axisLabelsDecimals: 0,
+                series: [
+                    {
+                        name: '%',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxAll,
+                            sdmxFirst
+                        ],
+                        categIndex: 0
+                    }
+                ]
             }
         },
         'FreshwaterResources_2': {
             type: 'Column',
-            jsonFiles: 'FreshwaterResources_2.json',
+            jsonFiles: ['fresh-water-resources/abstractions-pub-supply.json'],
             options: {
                 title: 'Freshwater abstractions for public supply per capita',
                 axisTitle: 'm³/capita',
                 valueDecimals: 1,
                 valueSuffix: 'm³',
                 axisMin: 0,
-                axisMax: 0.6,
-                axisTicksAt: 0.1,
-                axisLabelsAt: 0.1,
-                axisLabelsDecimals: 1
+                axisMax: 200,
+                axisTicksAt: 25,
+                axisLabelsAt: 50,
+                axisLabelsDecimals: 1,
+                series: [
+                    {
+                        name: '%',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxAll,
+                            sdmxFirst
+                        ],
+                        categIndex: 0
+                    }
+                ]
             }
         },
 
-
+        // WASTE GENERATION
         'WasteGeneration_1': {
             type: 'Line',
             jsonFiles: ['municipal-waste/gdp.json', 'municipal-waste/municipal-waste.json'],
@@ -486,7 +605,7 @@
         },
         'WasteGeneration_2': {
             type: 'Column',
-            jsonFiles: 'WasteGeneration_2.json',
+            jsonFiles: ['municipal-waste/waste-per-capita.json'],
             options: {
                 title: 'Municipal waste per capita',
                 tooltipHeader: 'Waste per capita',
@@ -495,14 +614,26 @@
                 axisMax: 800,
                 axisTicksAt: 200,
                 axisLabelsAt: 200,
-                axisLabelsDecimals: 0
+                axisLabelsDecimals: 0,
+                series: [
+                    {
+                        name: 'tonnes',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxAll,
+                            sdmxFirst
+                        ],
+                        categIndex: 0
+                    }
+                ]
             }
         },
         'WasteGeneration_3': {
-            type: 'StackedColumn',
-            jsonFiles: 'WasteGeneration_3.json',
+            // type: 'StackedColumn',
+             type: 'Column',
+             jsonFiles: ['municipal-waste/waste-recovery-rates.json'],
             options: {
-                title: 'Municipal waste recovery rate',
+                title: 'Municipal waste recovery rates',
                 axisTitle: '%',
                 valueDecimals: 2,
                 valueSuffix: '%',
@@ -510,7 +641,18 @@
                 axisMax: 100,
                 axisTicksAt: 20,
                 axisLabelsAt: 20,
-                axisLabelsDecimals: 2
+                axisLabelsDecimals: 2,
+                series: [
+                    {
+                        name: '%',
+                        useJsonIndex: 0,
+                        dataCoords: [
+                            sdmxAll,
+                            sdmxFirst
+                        ],
+                        categIndex: 0
+                    }
+                ]
             }
         }
     };
